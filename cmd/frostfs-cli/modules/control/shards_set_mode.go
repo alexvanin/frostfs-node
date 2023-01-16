@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	rawclient "github.com/TrueCloudLab/frostfs-api-go/v2/rpc/client"
-	"github.com/TrueCloudLab/frostfs-node/cmd/frostfs-cli/internal/common"
 	"github.com/TrueCloudLab/frostfs-node/cmd/frostfs-cli/internal/key"
+	commonCmd "github.com/TrueCloudLab/frostfs-node/cmd/internal/common"
 	"github.com/TrueCloudLab/frostfs-node/pkg/services/control"
 	"github.com/mr-tron/base58"
 	"github.com/spf13/cobra"
@@ -106,7 +106,7 @@ func setShardMode(cmd *cobra.Command, _ []string) {
 
 	mode, ok := lookUpShardModeFromString(strMode)
 	if !ok {
-		common.ExitOnErr(cmd, "", fmt.Errorf("unsupported mode %s", strMode))
+		commonCmd.ExitOnErr(cmd, "", fmt.Errorf("unsupported mode %s", strMode))
 	}
 
 	req := new(control.SetShardModeRequest)
@@ -130,7 +130,7 @@ func setShardMode(cmd *cobra.Command, _ []string) {
 		resp, err = control.SetShardMode(client, req)
 		return err
 	})
-	common.ExitOnErr(cmd, "rpc error: %w", err)
+	commonCmd.ExitOnErr(cmd, "rpc error: %w", err)
 
 	verifyResponse(cmd, resp.GetSignature(), resp.GetBody())
 
@@ -140,7 +140,7 @@ func setShardMode(cmd *cobra.Command, _ []string) {
 func getShardID(cmd *cobra.Command) []byte {
 	sid, _ := cmd.Flags().GetString(shardIDFlag)
 	raw, err := base58.Decode(sid)
-	common.ExitOnErr(cmd, "incorrect shard ID encoding: %w", err)
+	commonCmd.ExitOnErr(cmd, "incorrect shard ID encoding: %w", err)
 	return raw
 }
 
@@ -152,7 +152,7 @@ func getShardIDList(cmd *cobra.Command) [][]byte {
 
 	sidList, _ := cmd.Flags().GetStringSlice(shardIDFlag)
 	if len(sidList) == 0 {
-		common.ExitOnErr(cmd, "", fmt.Errorf("either --%s or --%s flag must be provided", shardIDFlag, shardAllFlag))
+		commonCmd.ExitOnErr(cmd, "", fmt.Errorf("either --%s or --%s flag must be provided", shardIDFlag, shardAllFlag))
 	}
 
 	// We can sort the ID list and perform this check without additional allocations,
@@ -161,7 +161,7 @@ func getShardIDList(cmd *cobra.Command) [][]byte {
 	seen := make(map[string]struct{})
 	for i := range sidList {
 		if _, ok := seen[sidList[i]]; ok {
-			common.ExitOnErr(cmd, "", fmt.Errorf("duplicated shard IDs: %s", sidList[i]))
+			commonCmd.ExitOnErr(cmd, "", fmt.Errorf("duplicated shard IDs: %s", sidList[i]))
 		}
 		seen[sidList[i]] = struct{}{}
 	}
@@ -169,7 +169,7 @@ func getShardIDList(cmd *cobra.Command) [][]byte {
 	res := make([][]byte, 0, len(sidList))
 	for i := range sidList {
 		raw, err := base58.Decode(sidList[i])
-		common.ExitOnErr(cmd, "incorrect shard ID encoding: %w", err)
+		commonCmd.ExitOnErr(cmd, "incorrect shard ID encoding: %w", err)
 
 		res = append(res, raw)
 	}
