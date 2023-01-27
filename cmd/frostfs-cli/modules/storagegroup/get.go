@@ -18,8 +18,8 @@ var sgID string
 
 var sgGetCmd = &cobra.Command{
 	Use:   "get",
-	Short: "Get storage group from NeoFS",
-	Long:  "Get storage group from NeoFS",
+	Short: "Get storage group from FrostFS",
+	Long:  "Get storage group from FrostFS",
 	Run:   getSG,
 }
 

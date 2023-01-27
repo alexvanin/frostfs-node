@@ -36,10 +36,10 @@ var (
 // rootCmd represents the base command when called without any subcommands.
 var rootCmd = &cobra.Command{
 	Use:   "frostfs-cli",
-	Short: "Command Line Tool to work with NeoFS",
-	Long: `NeoFS CLI provides all basic interactions with NeoFS and it's services.
+	Short: "Command Line Tool to work with FrostFS",
+	Long: `FrostFS CLI provides all basic interactions with FrostFS and it's services.
 
-It contains commands for interaction with NeoFS nodes using different versions
+It contains commands for interaction with FrostFS nodes using different versions
 of frostfs-api and some useful utilities for compiling ACL rules from JSON
 notation, managing container access through protocol gates, querying network map
 and much more!`,
@@ -70,7 +70,7 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().Bool("version", false, "Application version and NeoFS API compatibility")
+	rootCmd.Flags().Bool("version", false, "Application version and FrostFS API compatibility")
 
 	rootCmd.AddCommand(acl.Cmd)
 	rootCmd.AddCommand(bearerCli.Cmd)

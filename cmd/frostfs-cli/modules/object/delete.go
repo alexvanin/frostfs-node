@@ -15,8 +15,8 @@ import (
 var objectDelCmd = &cobra.Command{
 	Use:     "delete",
 	Aliases: []string{"del"},
-	Short:   "Delete object from NeoFS",
-	Long:    "Delete object from NeoFS",
+	Short:   "Delete object from FrostFS",
+	Long:    "Delete object from FrostFS",
 	Run:     deleteObject,
 }
 

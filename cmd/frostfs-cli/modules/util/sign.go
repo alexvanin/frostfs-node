@@ -11,7 +11,7 @@ const (
 
 var signCmd = &cobra.Command{
 	Use:   "sign",
-	Short: "Sign NeoFS structure",
+	Short: "Sign FrostFS structure",
 }
 
 func initSignCmd() {

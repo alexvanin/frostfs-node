@@ -4,7 +4,7 @@ import "github.com/spf13/cobra"
 
 var convertCmd = &cobra.Command{
 	Use:   "convert",
-	Short: "Convert representation of NeoFS structures",
+	Short: "Convert representation of FrostFS structures",
 }
 
 func initConvertCmd() {

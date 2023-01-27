@@ -13,8 +13,8 @@ import (
 
 var sgListCmd = &cobra.Command{
 	Use:   "list",
-	Short: "List storage groups in NeoFS container",
-	Long:  "List storage groups in NeoFS container",
+	Short: "List storage groups in FrostFS container",
+	Long:  "List storage groups in FrostFS container",
 	Run:   listSG,
 }
 
