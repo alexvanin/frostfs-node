@@ -22,7 +22,7 @@ var command = &cobra.Command{
 func entryPoint(cmd *cobra.Command, _ []string) error {
 	printVersion, _ := cmd.Flags().GetBool("version")
 	if printVersion {
-		cmd.Print(misc.BuildInfo("NeoFS Lens"))
+		cmd.Print(misc.BuildInfo("FrostFS Lens"))
 
 		return nil
 	}

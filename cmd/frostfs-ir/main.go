@@ -39,7 +39,7 @@ func main() {
 	flag.Parse()
 
 	if *versionFlag {
-		fmt.Print(misc.BuildInfo("NeoFS Inner Ring node"))
+		fmt.Print(misc.BuildInfo("FrostFS Inner Ring node"))
 
 		os.Exit(SuccessReturnCode)
 	}

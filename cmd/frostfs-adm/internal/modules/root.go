@@ -52,7 +52,7 @@ func Execute() error {
 func entryPoint(cmd *cobra.Command, args []string) error {
 	printVersion, _ := cmd.Flags().GetBool("version")
 	if printVersion {
-		cmd.Print(misc.BuildInfo("NeoFS Adm"))
+		cmd.Print(misc.BuildInfo("FrostFS Adm"))
 		return nil
 	}
 
