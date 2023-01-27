@@ -16,9 +16,9 @@ import (
 var (
 	rootCmd = &cobra.Command{
 		Use:   "frostfs-adm",
-		Short: "NeoFS Administrative Tool",
-		Long: `NeoFS Administrative Tool provides functions to setup and
-manage NeoFS network deployment.`,
+		Short: "FrostFS Administrative Tool",
+		Long: `FrostFS Administrative Tool provides functions to setup and
+manage FrostFS network deployment.`,
 		RunE:         entryPoint,
 		SilenceUsage: true,
 	}
