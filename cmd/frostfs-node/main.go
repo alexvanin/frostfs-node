@@ -41,7 +41,7 @@ func main() {
 	flag.Parse()
 
 	if *versionFlag {
-		fmt.Print(misc.BuildInfo("NeoFS Storage node"))
+		fmt.Print(misc.BuildInfo("FrostFS Storage node"))
 
 		os.Exit(SuccessReturnCode)
 	}

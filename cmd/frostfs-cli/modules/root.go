@@ -89,7 +89,7 @@ func init() {
 func entryPoint(cmd *cobra.Command, _ []string) {
 	printVersion, _ := cmd.Flags().GetBool("version")
 	if printVersion {
-		cmd.Print(misc.BuildInfo("NeoFS CLI"))
+		cmd.Print(misc.BuildInfo("FrostFS CLI"))
 
 		return
 	}
