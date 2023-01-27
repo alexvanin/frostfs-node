@@ -13,8 +13,8 @@ import (
 
 var command = &cobra.Command{
 	Use:          "frostfs-lens",
-	Short:        "NeoFS Storage Engine Lens",
-	Long:         `NeoFS Storage Engine Lens provides tools to browse the contents of the NeoFS storage engine.`,
+	Short:        "FrostFS Storage Engine Lens",
+	Long:         `FrostFS Storage Engine Lens provides tools to browse the contents of the FrostFS storage engine.`,
 	RunE:         entryPoint,
 	SilenceUsage: true,
 }
