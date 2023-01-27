@@ -108,7 +108,7 @@ var (
 
 	forceNewEpoch = &cobra.Command{
 		Use:   "force-new-epoch",
-		Short: "Create new NeoFS epoch event in the side chain",
+		Short: "Create new FrostFS epoch event in the side chain",
 		PreRun: func(cmd *cobra.Command, _ []string) {
 			_ = viper.BindPFlag(alphabetWalletsFlag, cmd.Flags().Lookup(alphabetWalletsFlag))
 			_ = viper.BindPFlag(endpointFlag, cmd.Flags().Lookup(endpointFlag))
@@ -130,7 +130,7 @@ var (
 	setConfig = &cobra.Command{
 		Use:                   "set-config key1=val1 [key2=val2 ...]",
 		DisableFlagsInUseLine: true,
-		Short:                 "Add/update global config value in the NeoFS network",
+		Short:                 "Add/update global config value in the FrostFS network",
 		PreRun: func(cmd *cobra.Command, _ []string) {
 			_ = viper.BindPFlag(alphabetWalletsFlag, cmd.Flags().Lookup(alphabetWalletsFlag))
 			_ = viper.BindPFlag(endpointFlag, cmd.Flags().Lookup(endpointFlag))
@@ -164,7 +164,7 @@ var (
 
 	dumpNetworkConfigCmd = &cobra.Command{
 		Use:   "dump-config",
-		Short: "Dump NeoFS network config",
+		Short: "Dump FrostFS network config",
 		PreRun: func(cmd *cobra.Command, _ []string) {
 			_ = viper.BindPFlag(endpointFlag, cmd.Flags().Lookup(endpointFlag))
 		},
@@ -182,7 +182,7 @@ var (
 
 	updateContractsCmd = &cobra.Command{
 		Use:   "update-contracts",
-		Short: "Update NeoFS contracts",
+		Short: "Update FrostFS contracts",
 		PreRun: func(cmd *cobra.Command, _ []string) {
 			_ = viper.BindPFlag(alphabetWalletsFlag, cmd.Flags().Lookup(alphabetWalletsFlag))
 			_ = viper.BindPFlag(endpointFlag, cmd.Flags().Lookup(endpointFlag))
@@ -192,7 +192,7 @@ var (
 
 	dumpContainersCmd = &cobra.Command{
 		Use:   "dump-containers",
-		Short: "Dump NeoFS containers to file",
+		Short: "Dump FrostFS containers to file",
 		PreRun: func(cmd *cobra.Command, _ []string) {
 			_ = viper.BindPFlag(endpointFlag, cmd.Flags().Lookup(endpointFlag))
 		},
@@ -201,7 +201,7 @@ var (
 
 	restoreContainersCmd = &cobra.Command{
 		Use:   "restore-containers",
-		Short: "Restore NeoFS containers from file",
+		Short: "Restore FrostFS containers from file",
 		PreRun: func(cmd *cobra.Command, _ []string) {
 			_ = viper.BindPFlag(alphabetWalletsFlag, cmd.Flags().Lookup(alphabetWalletsFlag))
 			_ = viper.BindPFlag(endpointFlag, cmd.Flags().Lookup(endpointFlag))
@@ -211,7 +211,7 @@ var (
 
 	listContainersCmd = &cobra.Command{
 		Use:   "list-containers",
-		Short: "List NeoFS containers",
+		Short: "List FrostFS containers",
 		PreRun: func(cmd *cobra.Command, _ []string) {
 			_ = viper.BindPFlag(endpointFlag, cmd.Flags().Lookup(endpointFlag))
 		},
@@ -236,8 +236,8 @@ func init() {
 	RootCmd.AddCommand(initCmd)
 	initCmd.Flags().String(alphabetWalletsFlag, "", "Path to alphabet wallets dir")
 	initCmd.Flags().StringP(endpointFlag, "r", "", "N3 RPC node endpoint")
-	initCmd.Flags().String(contractsInitFlag, "", "Path to archive with compiled NeoFS contracts (default fetched from latest github release)")
-	initCmd.Flags().Uint(epochDurationCLIFlag, 240, "Amount of side chain blocks in one NeoFS epoch")
+	initCmd.Flags().String(contractsInitFlag, "", "Path to archive with compiled FrostFS contracts (default fetched from latest github release)")
+	initCmd.Flags().Uint(epochDurationCLIFlag, 240, "Amount of side chain blocks in one FrostFS epoch")
 	initCmd.Flags().Uint(maxObjectSizeCLIFlag, 67108864, "Max single object size in bytes")
 	initCmd.Flags().Bool(homomorphicHashDisabledCLIFlag, false, "Disable object homomorphic hashing")
 	// Defaults are taken from neo-preodolenie.
@@ -289,7 +289,7 @@ func init() {
 	RootCmd.AddCommand(updateContractsCmd)
 	updateContractsCmd.Flags().String(alphabetWalletsFlag, "", "Path to alphabet wallets dir")
 	updateContractsCmd.Flags().StringP(endpointFlag, "r", "", "N3 RPC node endpoint")
-	updateContractsCmd.Flags().String(contractsInitFlag, "", "Path to archive with compiled NeoFS contracts (default fetched from latest github release)")
+	updateContractsCmd.Flags().String(contractsInitFlag, "", "Path to archive with compiled FrostFS contracts (default fetched from latest github release)")
 
 	RootCmd.AddCommand(dumpContainersCmd)
 	dumpContainersCmd.Flags().StringP(endpointFlag, "r", "", "N3 RPC node endpoint")
