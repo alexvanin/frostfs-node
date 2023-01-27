@@ -19,8 +19,8 @@ import (
 
 var objectGetCmd = &cobra.Command{
 	Use:   "get",
-	Short: "Get object from NeoFS",
-	Long:  "Get object from NeoFS",
+	Short: "Get object from FrostFS",
+	Long:  "Get object from FrostFS",
 	Run:   getObject,
 }
 
@@ -115,7 +115,7 @@ func getObject(cmd *cobra.Command, _ []string) {
 
 	if binary {
 		objToStore := res.Header()
-		//TODO(@acid-ant): #1932 Use streams to marshal/unmarshal payload
+		// TODO(@acid-ant): #1932 Use streams to marshal/unmarshal payload
 		objToStore.SetPayload(payloadBuffer.Bytes())
 		objBytes, err := objToStore.Marshal()
 		common.ExitOnErr(cmd, "", err)

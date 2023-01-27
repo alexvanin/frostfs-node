@@ -19,8 +19,8 @@ const (
 
 var healthCheckCmd = &cobra.Command{
 	Use:   "healthcheck",
-	Short: "Health check of the NeoFS node",
-	Long:  "Health check of the NeoFS node. Checks storage node by default, use --ir flag to work with Inner Ring.",
+	Short: "Health check of the FrostFS node",
+	Long:  "Health check of the FrostFS node. Checks storage node by default, use --ir flag to work with Inner Ring.",
 	Run:   healthCheck,
 }
 

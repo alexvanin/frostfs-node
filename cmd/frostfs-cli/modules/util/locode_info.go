@@ -18,7 +18,7 @@ var (
 
 	locodeInfoCmd = &cobra.Command{
 		Use:   "info",
-		Short: "Print information about UN/LOCODE from NeoFS database",
+		Short: "Print information about UN/LOCODE from FrostFS database",
 		Run: func(cmd *cobra.Command, _ []string) {
 			targetDB := locodebolt.New(locodebolt.Prm{
 				Path: locodeInfoDBPath,
@@ -48,7 +48,7 @@ var (
 func initUtilLocodeInfoCmd() {
 	flags := locodeInfoCmd.Flags()
 
-	flags.StringVar(&locodeInfoDBPath, locodeInfoDBFlag, "", "Path to NeoFS UN/LOCODE database")
+	flags.StringVar(&locodeInfoDBPath, locodeInfoDBFlag, "", "Path to FrostFS UN/LOCODE database")
 	_ = locodeInfoCmd.MarkFlagRequired(locodeInfoDBFlag)
 
 	flags.StringVar(&locodeInfoCode, locodeInfoCodeFlag, "", "UN/LOCODE")

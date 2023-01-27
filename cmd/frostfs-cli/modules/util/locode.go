@@ -7,7 +7,7 @@ import (
 // locode section.
 var locodeCmd = &cobra.Command{
 	Use:   "locode",
-	Short: "Working with NeoFS UN/LOCODE database",
+	Short: "Working with FrostFS UN/LOCODE database",
 }
 
 func initLocodeCmd() {

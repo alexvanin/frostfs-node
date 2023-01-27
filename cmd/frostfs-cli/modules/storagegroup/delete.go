@@ -13,8 +13,8 @@ import (
 
 var sgDelCmd = &cobra.Command{
 	Use:   "delete",
-	Short: "Delete storage group from NeoFS",
-	Long:  "Delete storage group from NeoFS",
+	Short: "Delete storage group from FrostFS",
+	Long:  "Delete storage group from FrostFS",
 	Run:   delSG,
 }
 

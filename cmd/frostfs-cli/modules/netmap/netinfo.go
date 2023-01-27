@@ -14,8 +14,8 @@ import (
 
 var netInfoCmd = &cobra.Command{
 	Use:   "netinfo",
-	Short: "Get information about NeoFS network",
-	Long:  "Get information about NeoFS network",
+	Short: "Get information about FrostFS network",
+	Long:  "Get information about FrostFS network",
 	Run: func(cmd *cobra.Command, args []string) {
 		p := key.GetOrGenerate(cmd)
 		cli := internalclient.GetSDKClientByFlag(cmd, p, commonflags.RPC)

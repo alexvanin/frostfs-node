@@ -21,8 +21,8 @@ const (
 
 var setNetmapStatusCmd = &cobra.Command{
 	Use:   "set-status",
-	Short: "Set status of the storage node in NeoFS network map",
-	Long:  "Set status of the storage node in NeoFS network map",
+	Short: "Set status of the storage node in FrostFS network map",
+	Long:  "Set status of the storage node in FrostFS network map",
 	Run:   setNetmapStatus,
 }
 

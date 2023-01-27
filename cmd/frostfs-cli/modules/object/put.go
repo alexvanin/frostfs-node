@@ -31,8 +31,8 @@ var putExpiredOn uint64
 
 var objectPutCmd = &cobra.Command{
 	Use:   "put",
-	Short: "Put object to NeoFS",
-	Long:  "Put object to NeoFS",
+	Short: "Put object to FrostFS",
+	Long:  "Put object to FrostFS",
 	Run:   putObject,
 }
 
@@ -82,7 +82,7 @@ func putObject(cmd *cobra.Command, _ []string) {
 		buf, err := os.ReadFile(filename)
 		common.ExitOnErr(cmd, "unable to read given file: %w", err)
 		objTemp := object.New()
-		//TODO(@acid-ant): #1932 Use streams to marshal/unmarshal payload
+		// TODO(@acid-ant): #1932 Use streams to marshal/unmarshal payload
 		common.ExitOnErr(cmd, "can't unmarshal object from given file: %w", objTemp.Unmarshal(buf))
 		payloadReader = bytes.NewReader(objTemp.Payload())
 		cnr, _ = objTemp.ContainerID()

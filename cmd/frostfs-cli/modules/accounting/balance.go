@@ -21,8 +21,8 @@ const (
 
 var accountingBalanceCmd = &cobra.Command{
 	Use:   "balance",
-	Short: "Get internal balance of NeoFS account",
-	Long:  `Get internal balance of NeoFS account`,
+	Short: "Get internal balance of FrostFS account",
+	Long:  `Get internal balance of FrostFS account`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var idUser user.ID
 
