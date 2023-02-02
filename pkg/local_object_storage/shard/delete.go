@@ -85,7 +85,7 @@ func (s *Shard) delete(prm DeletePrm) (DeleteRes, error) {
 	for i := range prm.addr {
 		removedPayload := res.RemovedObjectSizes()[i]
 		totalRemovedPayload += removedPayload
-		s.addToContainerSize(prm.addr[i].Container().EncodeToString(), -int64(removedPayload))
+		s.addToContainerSize(prm.addr[i].Container().EncodeToString(), "delete", -int64(removedPayload))
 	}
 	s.addToPayloadCounter(-int64(totalRemovedPayload))
 

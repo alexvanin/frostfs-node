@@ -2,6 +2,7 @@ package shard
 
 import (
 	"context"
+	"fmt"
 	"sync"
 	"time"
 
@@ -382,7 +383,8 @@ func (s *Shard) decObjectCounterBy(typ string, v uint64) {
 	}
 }
 
-func (s *Shard) addToContainerSize(cnr string, size int64) {
+func (s *Shard) addToContainerSize(cnr string, place string, size int64) {
+	println(fmt.Sprintf("correct size %d at place %s", size, place))
 	if s.cfg.metricsWriter != nil {
 		s.cfg.metricsWriter.AddToContainerSize(cnr, size)
 	}

@@ -107,6 +107,7 @@ func (db *DB) deleteGroup(tx *bbolt.Tx, addrs []oid.Address, sizes []uint64) (ui
 	var availableDeleted uint64
 
 	for i := range addrs {
+		// ToDo ?
 		removed, available, size, err := db.delete(tx, addrs[i], refCounter, currEpoch)
 		if err != nil {
 			return 0, 0, err // maybe log and continue?

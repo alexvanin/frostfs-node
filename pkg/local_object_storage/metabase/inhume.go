@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-
 	"github.com/TrueCloudLab/frostfs-node/pkg/local_object_storage/util/logicerr"
 	apistatus "github.com/TrueCloudLab/frostfs-sdk-go/client/status"
+	cid "github.com/TrueCloudLab/frostfs-sdk-go/container/id"
 	"github.com/TrueCloudLab/frostfs-sdk-go/object"
 	oid "github.com/TrueCloudLab/frostfs-sdk-go/object/id"
 	"go.etcd.io/bbolt"
@@ -27,6 +27,8 @@ type InhumePrm struct {
 type InhumeRes struct {
 	deletedLockObj   []oid.Address
 	availableImhumed uint64
+	sizes            []uint64
+	containersIds    []cid.ID
 }
 
 // AvailableInhumed return number of available object
@@ -40,6 +42,25 @@ func (i InhumeRes) AvailableInhumed() uint64 {
 // was provided to the InhumePrm.
 func (i InhumeRes) DeletedLockObjects() []oid.Address {
 	return i.deletedLockObj
+}
+
+// GetDeletionInfoLength returns amount of stored elements
+// in deleted sizes array.
+func (i InhumeRes) GetDeletionInfoLength() int {
+	return len(i.sizes)
+}
+
+// GetDeletionInfoByIndex returns both deleted object sizes and
+// associated container ID by index.
+func (i InhumeRes) GetDeletionInfoByIndex(target int) (cid.ID, uint64) {
+	return i.containersIds[target], i.sizes[target]
+}
+
+// StoreDeletionInfo stores size of deleted object and associated container ID
+// in corresponding arrays.
+func (i *InhumeRes) StoreDeletionInfo(containerId cid.ID, deletedSize uint64) {
+	i.sizes = append(i.sizes, deletedSize)
+	i.containersIds = append(i.containersIds, containerId)
 }
 
 // SetAddresses sets a list of object addresses that should be inhumed.
@@ -164,10 +185,13 @@ func (db *DB) Inhume(prm InhumePrm) (res InhumeRes, err error) {
 			obj, err := db.get(tx, prm.target[i], buf, false, true, currEpoch)
 			targetKey := addressKey(prm.target[i], buf)
 			if err == nil {
+				// ToDo: deal with the returned bool
+				containerId, _ := obj.ContainerID()
 				if inGraveyardWithKey(targetKey, graveyardBKT, garbageBKT) == 0 {
 					// object is available, decrement the
 					// logical counter
 					inhumed++
+					res.StoreDeletionInfo(containerId, obj.PayloadSize())
 				}
 
 				// if object is stored, and it is regular object then update bucket
