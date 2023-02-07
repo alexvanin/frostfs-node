@@ -331,9 +331,7 @@ const (
 )
 
 func (s *Shard) updateMetrics() {
-	fmt.Println("!!! I update metrics", s.GetMode().NoMetabase(), s.cfg.metricsWriter != nil)
 	if s.cfg.metricsWriter != nil && !s.GetMode().NoMetabase() {
-		fmt.Println("!! inside update branch")
 		cc, err := s.metaBase.ObjectCounters()
 		if err != nil {
 			s.log.Warn("meta: object counter read",
