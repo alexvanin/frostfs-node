@@ -80,6 +80,7 @@ func (s *Shard) Put(prm PutPrm) (PutRes, error) {
 
 		s.incObjectCounter()
 		s.addToContainerSize(putPrm.Address.Container().EncodeToString(), "Put", int64(prm.obj.PayloadSize()))
+		s.addToPayloadCounter(int64(prm.obj.PayloadSize()))
 	}
 
 	return PutRes{}, nil

@@ -2,6 +2,7 @@ package shard
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/TrueCloudLab/frostfs-node/pkg/local_object_storage/blobstor/common"
 	meta "github.com/TrueCloudLab/frostfs-node/pkg/local_object_storage/metabase"
@@ -81,13 +82,17 @@ func (s *Shard) delete(prm DeletePrm) (DeleteRes, error) {
 	var totalRemovedPayload uint64
 
 	s.decObjectCounterBy(physical, res.RawObjectsRemoved())
-	s.decObjectCounterBy(logical, res.AvailableObjectsRemoved())
+	s.decObjectCounterBy(logical, res.AvailableObjectsRemoved()) // always 0
 	for i := range prm.addr {
 		removedPayload := res.RemovedObjectSizes()[i]
 		totalRemovedPayload += removedPayload
-		s.addToContainerSize(prm.addr[i].Container().EncodeToString(), "delete", -int64(removedPayload))
+		logicalRemovedPayload := res.RemovedLogicalObjectSizes()[i]
+		if logicalRemovedPayload > 0 {
+			s.addToContainerSize(prm.addr[i].Container().EncodeToString(), "delete", -int64(logicalRemovedPayload))
+		}
 	}
 	s.addToPayloadCounter(-int64(totalRemovedPayload))
+	fmt.Println("!!!!!!!!!!!", res.AvailableObjectsRemoved(), res.RawObjectsRemoved(), totalRemovedPayload)
 
 	for i := range prm.addr {
 		var delPrm common.DeletePrm
