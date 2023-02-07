@@ -36,6 +36,7 @@ func (s *Shard) Delete(prm DeletePrm) (DeleteRes, error) {
 }
 
 func (s *Shard) delete(prm DeletePrm) (DeleteRes, error) {
+	fmt.Println("!!! DELETE HAPPENS")
 	if s.info.Mode.ReadOnly() {
 		return DeleteRes{}, ErrReadOnlyMode
 	} else if s.info.Mode.NoMetabase() {
