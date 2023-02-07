@@ -41,6 +41,7 @@ func (db *DB) containers(tx *bbolt.Tx) ([]cid.ID, error) {
 	return result, err
 }
 
+// container size returns size of all avaialbe objects not physical
 func (db *DB) ContainerSize(id cid.ID) (size uint64, err error) {
 	db.modeMtx.RLock()
 	defer db.modeMtx.RUnlock()

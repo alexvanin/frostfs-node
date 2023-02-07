@@ -2,7 +2,6 @@ package shard
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/TrueCloudLab/frostfs-node/pkg/local_object_storage/blobstor/common"
 	meta "github.com/TrueCloudLab/frostfs-node/pkg/local_object_storage/metabase"
@@ -36,7 +35,6 @@ func (s *Shard) Delete(prm DeletePrm) (DeleteRes, error) {
 }
 
 func (s *Shard) delete(prm DeletePrm) (DeleteRes, error) {
-	fmt.Println("!!! DELETE HAPPENS")
 	if s.info.Mode.ReadOnly() {
 		return DeleteRes{}, ErrReadOnlyMode
 	} else if s.info.Mode.NoMetabase() {
@@ -93,7 +91,7 @@ func (s *Shard) delete(prm DeletePrm) (DeleteRes, error) {
 		}
 	}
 	s.addToPayloadCounter(-int64(totalRemovedPayload))
-	fmt.Println("!!!!!!!!!!!", res.AvailableObjectsRemoved(), res.RawObjectsRemoved(), totalRemovedPayload)
+	// fmt.Println("!!!!!!!!!!!", res.AvailableObjectsRemoved(), res.RawObjectsRemoved(), totalRemovedPayload)
 
 	for i := range prm.addr {
 		var delPrm common.DeletePrm

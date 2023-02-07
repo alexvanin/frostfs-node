@@ -353,7 +353,7 @@ func (s *Shard) updateMetrics() {
 
 		var totalPayload uint64
 
-		// diffirinitaete logic + phy
+		// diffirinitaete logic
 		for i := range cnrList {
 			size, err := s.metaBase.ContainerSize(cnrList[i])
 			if err != nil {

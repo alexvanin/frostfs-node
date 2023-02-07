@@ -54,18 +54,14 @@ func (db *DB) ObjectCounters() (cc ObjectCounters, err error) {
 		b := tx.Bucket(shardInfoBucket)
 		if b != nil {
 			data := b.Get(objectPhyCounterKey)
-			fmt.Println("!! phy key size", len(data))
 			if len(data) == 8 {
 				cc.phy = binary.LittleEndian.Uint64(data)
 			}
 
-			fmt.Println("!! log key size", len(data))
 			data = b.Get(objectLogicCounterKey)
 			if len(data) == 8 {
 				cc.logic = binary.LittleEndian.Uint64(data)
 			}
-		} else {
-			fmt.Println("!!! bucket does not exist")
 		}
 
 		return nil
@@ -77,10 +73,8 @@ func (db *DB) ObjectCounters() (cc ObjectCounters, err error) {
 // updateCounter updates the object counter. Tx MUST be writable.
 // If inc == `true`, increases the counter, decreases otherwise.
 func (db *DB) updateCounter(tx *bbolt.Tx, typ objectType, delta uint64, inc bool) error {
-	fmt.Println("!! I update metabase counter")
 	b := tx.Bucket(shardInfoBucket)
 	if b == nil {
-		fmt.Println("!! shard info bucket is not available")
 		return nil
 	}
 
@@ -111,8 +105,6 @@ func (db *DB) updateCounter(tx *bbolt.Tx, typ objectType, delta uint64, inc bool
 
 	newCounter := make([]byte, 8)
 	binary.LittleEndian.PutUint64(newCounter, counter)
-
-	fmt.Println("!! new counter value", counter, string(counterKey))
 
 	return b.Put(counterKey, newCounter)
 }
