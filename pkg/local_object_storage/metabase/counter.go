@@ -54,14 +54,18 @@ func (db *DB) ObjectCounters() (cc ObjectCounters, err error) {
 		b := tx.Bucket(shardInfoBucket)
 		if b != nil {
 			data := b.Get(objectPhyCounterKey)
+			fmt.Println("!! phy key size", len(data))
 			if len(data) == 8 {
 				cc.phy = binary.LittleEndian.Uint64(data)
 			}
 
+			fmt.Println("!! log key size", len(data))
 			data = b.Get(objectLogicCounterKey)
 			if len(data) == 8 {
 				cc.logic = binary.LittleEndian.Uint64(data)
 			}
+		} else {
+			fmt.Println("!!! bucket does not exist")
 		}
 
 		return nil
