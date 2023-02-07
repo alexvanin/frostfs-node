@@ -331,7 +331,9 @@ const (
 )
 
 func (s *Shard) updateMetrics() {
+	fmt.Println("!!! I update metrics", s.GetMode().NoMetabase(), s.cfg.metricsWriter != nil)
 	if s.cfg.metricsWriter != nil && !s.GetMode().NoMetabase() {
+		fmt.Println("!! inside update branch")
 		cc, err := s.metaBase.ObjectCounters()
 		if err != nil {
 			s.log.Warn("meta: object counter read",
@@ -341,6 +343,7 @@ func (s *Shard) updateMetrics() {
 			return
 		}
 
+		fmt.Println("!! conunter results", cc.Phy(), cc.Logic())
 		s.cfg.metricsWriter.SetObjectCounter(physical, cc.Phy())
 		s.cfg.metricsWriter.SetObjectCounter(logical, cc.Logic())
 
@@ -352,6 +355,7 @@ func (s *Shard) updateMetrics() {
 
 		var totalPayload uint64
 
+		// diffirinitaete logic + phy
 		for i := range cnrList {
 			size, err := s.metaBase.ContainerSize(cnrList[i])
 			if err != nil {
