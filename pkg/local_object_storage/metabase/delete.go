@@ -79,7 +79,7 @@ func (db *DB) Delete(prm DeletePrm) (DeleteRes, error) {
 	var availableRemoved uint64
 	var err error
 	var sizes = make([]uint64, len(prm.addrs))
-	var availableSizes = make([]uint64, 0, len(prm.addrs))
+	var availableSizes = make([]uint64, len(prm.addrs))
 
 	err = db.boltDB.Update(func(tx *bbolt.Tx) error {
 		// We need to clear slice because tx can try to execute multiple times.
